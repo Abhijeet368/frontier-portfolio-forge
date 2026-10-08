@@ -1,0 +1,10 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { ArrowUpRight, Mail, Github, Linkedin } from "lucide-react";
+import { portfolio } from "@/content/portfolio";
+import { Button } from "@/components/ui/button";
+import { PageHeading } from "@/components/page-heading";
+export const Route = createFileRoute("/contact")({
+  head: () => ({ meta: [{ title: "Ride with me — Contact Abhiii" }, { name: "description", content: "Connect with Abhiii about data science, interesting questions, and opportunities." }, { property: "og:title", content: "Ride with me — Contact Abhiii" }, { property: "og:description", content: "A new question, an opportunity, or a hello. Let's cross paths." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
+  component: Contact,
+});
+function Contact() { const hasContact = portfolio.email || portfolio.github || portfolio.linkedin; return <><PageHeading number="04" label="Cross paths" title="Let's ride together." description="A good conversation can lead to a whole new frontier." /><section className="section-content contact-layout reveal-in"><div className="section-number">{portfolio.availability}</div><h2>Got an interesting question?</h2><p>Data, ideas, opportunities, or just a friendly hello — I'm always up for a conversation.</p>{hasContact ? <div className="contact-links">{portfolio.email && <Button variant="frontier" asChild><a href={`mailto:${portfolio.email}`}><Mail />Send a message <ArrowUpRight /></a></Button>}{portfolio.github && <Button variant="frontierOutline" asChild><a href={portfolio.github} target="_blank" rel="noreferrer"><Github />GitHub <ArrowUpRight /></a></Button>}{portfolio.linkedin && <Button variant="frontierOutline" asChild><a href={portfolio.linkedin} target="_blank" rel="noreferrer"><Linkedin />LinkedIn <ArrowUpRight /></a></Button>}</div> : <div className="contact-pending"><Mail size={22} /><span>Contact details are coming soon.</span></div>}</section></>; }

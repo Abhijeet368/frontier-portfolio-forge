@@ -1,0 +1,10 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ArrowUpRight, Pickaxe } from "lucide-react";
+import { portfolio } from "@/content/portfolio";
+import { Button } from "@/components/ui/button";
+import { PageHeading } from "@/components/page-heading";
+export const Route = createFileRoute("/work")({
+  head: () => ({ meta: [{ title: "The work — Abhiii's data science frontier" }, { name: "description", content: "Follow Abhiii's upcoming data science projects and discoveries." }, { property: "og:title", content: "The work — Abhiii" }, { property: "og:description", content: "New territory. New questions. Upcoming data science projects." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
+  component: Work,
+});
+function Work() { return <><PageHeading number="03" label="The work" title="Uncharted territory." description="Experiments, discoveries, and stories from the data frontier." /><section className="section-content reveal-in">{portfolio.projects.length === 0 ? <div className="empty-work"><Pickaxe /><div className="section-number">The first expedition is ahead</div><h2>Good things take grit.</h2><p>No projects to share just yet. The journey is beginning — come back for the first discovery.</p><Button variant="frontierOutline" asChild><Link to="/about">Meet the explorer <ArrowUpRight /></Link></Button></div> : <div className="project-grid">{portfolio.projects.map(project => <article key={project.title} className="project-item"><div className="section-number">{project.category}</div><h2>{project.title}</h2><p>{project.description}</p>{project.url && <Button variant="frontierOutline" asChild><a href={project.url} target="_blank" rel="noreferrer">View project <ArrowUpRight /></a></Button>}</article>)}</div>}</section></>; }
